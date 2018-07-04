@@ -1,0 +1,62 @@
+DB Έν - foodmarket
+id - foodmarketid
+pw - foodmarketpw
+
+CREATE TABLE `restaurant` (
+	`r_code` VARCHAR(50) NOT NULL,
+	`r_name` VARCHAR(50) NOT NULL,
+	`r_kind` VARCHAR(50) NOT NULL,
+	`r_menu` VARCHAR(50) NOT NULL,
+	`r_phone` VARCHAR(50) NOT NULL,
+	`r_addr` VARCHAR(50) NOT NULL,
+	`r_date` DATE NOT NULL,
+	PRIMARY KEY (`r_code`)
+)
+COLLATE='euckr_korean_ci'
+ENGINE=InnoDB;
+
+CREATE TABLE `menu` (
+	`r_code` VARCHAR(50) NOT NULL,
+	`f_name` VARCHAR(50) NOT NULL,
+	`f_price` VARCHAR(50) NOT NULL,
+	PRIMARY KEY (`f_name`),
+	INDEX `FK_menu_restaurant` (`r_code`),
+	CONSTRAINT `FK_menu_restaurant` FOREIGN KEY (`r_code`) REFERENCES `restaurant` (`r_code`)
+)
+COLLATE='euckr_korean_ci'
+ENGINE=InnoDB;
+
+CREATE TABLE `member` (
+	`m_id` VARCHAR(50) NOT NULL,
+	`m_pw` VARCHAR(50) NOT NULL,
+	`m_name` VARCHAR(50) NOT NULL,
+	`m_level` VARCHAR(50) NOT NULL,
+	`m_email` VARCHAR(50) NOT NULL,
+	`m_addr` VARCHAR(50) NOT NULL,
+	`m_phone` VARCHAR(50) NOT NULL,
+	`m_date` DATE NOT NULL,
+	PRIMARY KEY (`m_id`)
+)
+COLLATE='euckr_korean_ci'
+ENGINE=InnoDB;
+
+CREATE TABLE `comment` (
+	`comment_no` INT(10) NOT NULL AUTO_INCREMENT,
+	`r_code` VARCHAR(50) NOT NULL,
+	`id` VARCHAR(50) NOT NULL,
+	`comment_content` VARCHAR(50) NOT NULL,
+	`date` DATE NOT NULL,
+	PRIMARY KEY (`comment_no`),
+	INDEX `FK_comment_restaurant` (`r_code`),
+	CONSTRAINT `FK_comment_restaurant` FOREIGN KEY (`r_code`) REFERENCES `restaurant` (`r_code`)
+)
+COLLATE='euckr_korean_ci'
+ENGINE=InnoDB;
+
+CREATE TABLE `admin` (
+	`a_id` VARCHAR(50) NOT NULL,
+	`a_pw` VARCHAR(50) NOT NULL,
+	PRIMARY KEY (`a_id`)
+)
+COLLATE='euckr_korean_ci'
+ENGINE=InnoDB;
