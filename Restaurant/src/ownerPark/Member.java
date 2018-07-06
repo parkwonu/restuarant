@@ -6,14 +6,27 @@ public class Member {
 	private String m_pw1;
 	private String m_name;
 	private String m_level;
+	private String m_email;
 	private String m_email1;
 	private String m_email2;
 	private String m_addr;
+	private String m_phone;
 	private String m_phone1;
 	private String m_phone2;
 	private String m_phone3;
 	private String m_date;
-	
+	public String getM_email() {
+		return m_email;
+	}
+	public void setM_email(String m_email) {
+		this.m_email = m_email;
+	}
+	public String getM_phone() {
+		return m_phone;
+	}
+	public void setM_phone(String m_phone) {
+		this.m_phone = m_phone;
+	}
 	public String getM_id() {
 		return m_id;
 	}

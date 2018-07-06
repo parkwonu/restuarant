@@ -1,13 +1,12 @@
-<!-- 김호순 2018.7.5(목) -->
 <%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
-<%@ page import="ownerPark.MemberSelectDao" %>
-<%@ page import="ownerPark.Member" %>
+<%@ page  import="ownerPark.Member" %>
+<%@ page  import="ownerPark.MemberSearchDao" %>
 <%@ page import="java.util.ArrayList" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-<title>memberSearchList</title>
+<title>Insert title here</title>
 </head>
 <body>
 	<div>회원검색</div>
@@ -40,28 +39,31 @@
 <%
 	request.setCharacterEncoding("euc-kr");
 
-	MemberSelectDao mdao = new MemberSelectDao();
-	System.out.println(mdao + "<--mdao");
-	ArrayList<Member> get_alm = mdao.memberAllSelect();
-	System.out.println(get_alm + "<--get_alm");
+	String sel = request.getParameter("sel");
+	String txt = request.getParameter("txt");
+	System.out.println(sel + "셀렉트 박스");
+	System.out.println(txt + "텍스트 박스");
 	
-	for(int i=0; i<get_alm.size(); i++){
-	Member m = get_alm.get(i);
+	MemberSearchDao mdao = new MemberSearchDao();
+	ArrayList<Member> get_allMemberList = mdao.memberSearch(sel, txt);
+	
+	for(int i=0; i<get_allMemberList.size(); i++){
+		Member member = get_allMemberList.get(i);
 %>
-	<tr>
-		<td><%=m.getM_id()%></td>
-		<td><%=m.getM_pw()%></td>
-		<td><%=m.getM_name()%></td>
-		<td><%=m.getM_level()%></td>
-		<td><%=m.getM_email()%></td>
-		<td><%=m.getM_addr()%></td>
-		<td><%=m.getM_phone()%></td>
-		<td><%=m.getM_date() %></td>
-		<td><a href="<%=request.getContextPath()%>/Update/memberUpdateForm.jsp?send_id=<%=m.getM_id()%>">수정</a></td>
-		<td><a href="<%=request.getContextPath()%>/Delete/memberDeleteAction.jsp?send_id=<%=m.getM_id()%>">삭제</a></td>
-	</tr>
+		<tr>
+		<td><%=member.getM_id()%></td>
+		<td><%=member.getM_pw()%></td>
+		<td><%=member.getM_name()%></td>
+		<td><%=member.getM_level()%></td>
+		<td><%=member.getM_email()%></td>
+		<td><%=member.getM_addr()%></td>
+		<td><%=member.getM_phone()%></td>
+		<td><%=member.getM_date() %></td>
+		<td><a href="<%=request.getContextPath()%>/Update/memberUpdateForm.jsp?send_id=<%=member.getM_id()%>">수정</a></td>
+		<td><a href="<%=request.getContextPath()%>/Delete/memberDeleteAction.jsp?send_id=<%=member.getM_id()%>">삭제</a></td>
+		</tr>
 <%
-}
+	}
 %>
 	</table>
 </body>
