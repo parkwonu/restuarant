@@ -48,10 +48,8 @@ body {
 		<label class="legend">아이디</label> <input name="id" type="text">
 		<label class="legend">패스워드</label> <input name="pw" type="password">
 		<div>
-			<input type="submit" value="로그인">
-			<button>
-				<a href="<%= request.getContextPath() %>/Join/joinForm.jsp">회원가입</a>
-			</button>
+			<input id = "btn_login.gif" type="IMAGE" src = "<%= request.getContextPath() %>/img/btn_login.gif" value = "submit">
+			<a href="<%= request.getContextPath() %>/Join/joinForm.jsp"><img src = "<%= request.getContextPath() %>/img/btn_join.gif"></a>
 		</div>
 	</form>
 </body>
