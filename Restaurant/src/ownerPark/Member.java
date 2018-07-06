@@ -99,6 +99,5 @@ public class Member {
 	public void setM_date(String m_date) {
 		this.m_date = m_date;
 	}
-	
-	
 }
+

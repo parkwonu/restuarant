@@ -1,3 +1,4 @@
+//2018.07.06 박원우
 package ownerPark;
 
 import ownerPark.DriverDB;
@@ -11,7 +12,9 @@ import java.util.ArrayList;
 public class MemberLoginDao {
 	Connection conn = null;
 	PreparedStatement pstmt = null;
+	PreparedStatement pstmt1 = null;
 	ResultSet rs = null;
+	ResultSet rs1 = null;
 	ArrayList<Member> alm = null;
 	
 	//로그인 체크 메서드
@@ -26,8 +29,25 @@ public class MemberLoginDao {
 		
 		rs = pstmt.executeQuery();
 		
+		pstmt1 = conn.prepareStatement("select a_pw from admin where a_id=?");
+		pstmt1.setString(1, in_id);
+		
+		rs1 = pstmt1.executeQuery();
+		
 		if(rs.next()){
 			if(in_pw.equals(rs.getString("m_pw"))) {
+				System.out.println("01로그인 성공");
+				 i = "01로그인성공";
+			}else{
+				System.out.println("03비번 불일치");
+				i = "03비번불일치";
+			}
+		}else{
+			System.out.println("02아이디 불일치");
+			i = "02아이디불일치";
+		}
+		if(rs1.next()){
+			if(in_pw.equals(rs1.getString("a_pw"))) {
 				System.out.println("01로그인 성공");
 				 i = "01로그인성공";
 			}else{
@@ -52,11 +72,22 @@ public class MemberLoginDao {
 		
 		rs = pstmt.executeQuery();
 		
+		pstmt1 = conn.prepareStatement("select a_id,a_level,a_name from admin where a_id=?");
+		pstmt1.setString(1, in_id);
+		
+		rs1 = pstmt1.executeQuery();
+		
 		if(rs.next()) {
 			m = new Member();
 			m.setM_id(rs.getString("m_id"));
 			m.setM_name(rs.getString("m_name"));
 			m.setM_level(rs.getString("m_level"));
+		}
+		if(rs1.next()) {
+			m = new Member();
+			m.setM_id(rs1.getString("a_id"));
+			m.setM_name(rs1.getString("a_name"));
+			m.setM_level(rs1.getString("a_level"));
 		}
 		return m;
 	}
