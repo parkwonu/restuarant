@@ -30,16 +30,16 @@
 			        alert("이름을 입력하세요.");
 			        return false;
 			    }
-			    if(!form.m_email1.value && form.m_email2.value){
-			        alert("메일 주소를 입력하세요.");
-			        return false;
-			    }
-			    if(!form.m_phone1.value && !form.m_phone2.value && !form.m_phone3.value){
-			        alert("전화번호를 입력하세요.");
+			    if(!form.m_email1.value || (form.m_email2.value==="선택")){
+			        alert("이메일 주소를 입력하세요.");
 			        return false;
 			    }
 			    if(!form.m_addr.value){
 			        alert("주소를 입력하세요.");
+			        return false;
+			    }
+			    if(!form.m_phone1.value || !form.m_phone2.value || !form.m_phone3.value){
+			        alert("전화번호를 입력하세요.");
 			        return false;
 			    }
 			}
