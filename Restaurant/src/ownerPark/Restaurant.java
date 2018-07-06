@@ -4,6 +4,7 @@ public class Restaurant {
 	private String r_code;
 	private String r_name;
 	private String r_kind;
+	private String r_phone;
 	private String r_phone1;
 	private String r_phone2;
 	private String r_phone3;
@@ -57,5 +58,11 @@ public class Restaurant {
 	}
 	public void setR_date(String r_date) {
 		this.r_date = r_date;
+	}
+	public String getR_phone() {
+		return r_phone;
+	}
+	public void setR_phone(String r_phone) {
+		this.r_phone = r_phone;
 	}
 }

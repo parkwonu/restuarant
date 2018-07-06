@@ -1,7 +1,6 @@
-<!-- 김호순 2018.7.6(금) -->
 <%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
-<%@ page import="ownerPark.RestaurantSelectDao" %>
 <%@ page import="ownerPark.Restaurant" %>
+<%@ page import="ownerPark.RestaurantSearchDao" %>
 <%@ page import="java.util.ArrayList" %>
 <!DOCTYPE html>
 <html>
@@ -10,6 +9,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+<div>회원검색</div>
 	<form action="<%= request.getContextPath()%>/Search/restaurantSearchActionList.jsp" method="post">
 		<select name="sel">
 			<option value="r_all">전체</option>
@@ -17,7 +17,7 @@
 			<option value="r_kind">음식 종류</option>
 		</select>
 		<input type="text" name="txt">
-		<input type="submit" value="음시점 찾기">
+		<input type="submit" value="음식점 찾기">
 	</form>
 	<h3>음식점 리스트</h3>
 	<table  border="1">
@@ -31,14 +31,17 @@
 		</tr>
 <%
 	request.setCharacterEncoding("euc-kr");
-
-	RestaurantSelectDao rdao = new RestaurantSelectDao();
-	System.out.println(rdao + "<--rdao");
-	ArrayList<Restaurant> get_alr = rdao.restaurantAllSelect();
-	System.out.println(get_alr + "<--get_alr");
 	
-	for(int i=0; i<get_alr.size(); i++){
-		Restaurant restaurant = get_alr.get(i);
+	String sel = request.getParameter("sel");
+	String txt = request.getParameter("txt");
+	System.out.println(sel + "셀렉트 박스");
+	System.out.println(txt + "텍스트 박스");
+	
+	RestaurantSearchDao rdao = new RestaurantSearchDao();
+	ArrayList<Restaurant> get_allRestaurantList = rdao.restaurantSearch(sel, txt);
+	
+	for(int i=0; i<get_allRestaurantList.size(); i++){
+		Restaurant restaurant = get_allRestaurantList.get(i);
 %>
 	<tr>
 		<td><%=restaurant.getR_code()%></td>
@@ -49,7 +52,7 @@
 		<td><%=restaurant.getR_date()%></td>
 	</tr>
 <%
-}
+	}
 %>
 	</table>
 </body>
