@@ -33,19 +33,18 @@
 			<%	
 					if(S_LEVEL.equals("일반회원")){ 
 			%>
-					<a href="<%= request.getContextPath() %>/Join/joinForm.jsp"> 회원가입 </a>
 					<a href="<%= request.getContextPath() %>/Select/memberInfo.jsp?send_id=<%=S_ID%>"> 내정보 </a>
 					<a href="<%= request.getContextPath() %>/Select/restaurantSearchList.jsp"> 상품검색 </a>
 			<%	
 					}else if(S_LEVEL.equals("개인사업자")){ 
 			%>
-					<a href="<%= request.getContextPath() %>/Join/joinForm.jsp"> 회원가입 </a>
 					<a href="<%= request.getContextPath() %>/Select/memberInfo.jsp?send_id=<%=S_ID%>"> 내정보 </a>
-					<a href="<%= request.getContextPath() %>#"> 상품등록 </a>
+					<a href="<%= request.getContextPath() %>/Insert/restaurantInsertForm.jsp"> 상품등록 </a>
 					<a href="<%= request.getContextPath() %>/Select/restaurantSearchList.jsp"> 상품검색 </a>
 			<%	
 					}else if(S_ID.equals("id001")){ 
 			%>
+					<a href="<%= request.getContextPath() %>/Select/memberInfo.jsp?send_id=<%=S_ID%>"> 내정보 </a>
 					<a href="<%= request.getContextPath() %>/Select/memberSearchList.jsp"> 전체회원검색 </a>
 					<a href="<%= request.getContextPath() %>/Select/restaurantSearchList.jsp"> 상품검색 </a>
 			<%	

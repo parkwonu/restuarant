@@ -15,6 +15,8 @@
 	
 	MemberLoginDao mdao = new MemberLoginDao();
 	Member m = mdao.memberInfo(send_id);
+	
+	if(!send_id.equals("id001")){
 %>
 <h3>개인 회원 정보</h3>
 <table border="1">
@@ -27,11 +29,11 @@
 		<td><%=m.getM_pw() %></td>
 	</tr>
 	<tr>
-		<td>권한</td>
+		<td>이름</td>
 		<td><%=m.getM_name() %></td>
 	</tr>
 	<tr>
-		<td>이름</td>
+		<td>권한</td>
 		<td><%=m.getM_level() %></td>
 	</tr>
 	<tr>
@@ -51,5 +53,29 @@
 		<td><%=m.getM_date() %></td>
 	</tr>
 </table>
+<%
+	}if(send_id.equals("id001")){
+%>
+<h3>개인 회원 정보</h3>
+<table border="1">
+	<tr>
+		<td>아이디</td>
+		<td><%=m.getM_id() %></td>
+	</tr>
+	<tr>
+		<td>비번</td>
+		<td><%=m.getM_pw() %></td>
+	</tr>
+	<tr>
+		<td>이름</td>
+		<td><%=m.getM_name() %></td>
+	</tr>
+	<tr>
+		<td>권한</td>
+		<td><%=m.getM_level() %></td>
+</table>
+<%
+}
+%>
 </body>
 </html>

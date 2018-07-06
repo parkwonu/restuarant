@@ -42,11 +42,7 @@ public class MemberLoginDao {
 				System.out.println("03비번 불일치");
 				i = "03비번불일치";
 			}
-		}else{
-			System.out.println("02아이디 불일치");
-			i = "02아이디불일치";
-		}
-		if(rs1.next()){
+		}else if(rs1.next()){
 			if(in_pw.equals(rs1.getString("a_pw"))) {
 				System.out.println("01로그인 성공");
 				 i = "01로그인성공";
@@ -91,48 +87,6 @@ public class MemberLoginDao {
 		}
 		return m;
 	}
-	//검색 메서드
-	public ArrayList<Member> mSearch(String sk,String sv) throws ClassNotFoundException, SQLException{
-		DriverDB db = new DriverDB();
-		conn = db.driverDBcon();
-		
-		alm = new ArrayList<Member>();
-		
-		if(sk == null & sv == null){
-			System.out.println("01 sk 널 sv 널");
-			System.out.println("select * from member");
-			pstmt = conn.prepareStatement("select * from member");
-			
-		}else if(sk != null & sv.equals("")){
-			System.out.println("02 sk 널 sv 공백");
-			System.out.println("select * from member");	
-			pstmt = conn.prepareStatement("select * from member");
-
-		}else if(sk != null & sv != null){
-			System.out.println("03 sk 있고 sv 있고");
-			System.out.println("03_01 m_id 조건");
-			pstmt = conn.prepareStatement("select * from member where "+sk+ "=?");
-			pstmt.setString(1, sv);
-		}
-		rs = pstmt.executeQuery();
-		
-		while(rs.next()){
-			Member m = new Member();
-			
-			m.setM_id(rs.getString("m_id"));
-			m.setM_pw(rs.getString("m_pw"));
-			m.setM_name(rs.getString("m_name"));
-			m.setM_level(rs.getString("m_level"));
-			m.setM_email1(rs.getString("m_email"));
-			m.setM_addr(rs.getString("m_addr"));
-			m.setM_phone1(rs.getString("m_phone"));
-			
-			alm.add(m);
-		}
-		pstmt.close();
-		conn.close();
-		return alm;
-	}
 	
 	public Member memberInfo(String send_id) throws ClassNotFoundException, SQLException {
 		DriverDB db = new DriverDB();
@@ -145,6 +99,11 @@ public class MemberLoginDao {
 		
 		rs = pstmt.executeQuery();
 		
+		pstmt1 = conn.prepareStatement("select * from admin where a_id=?");
+		pstmt1.setString(1, send_id);
+		
+		rs1 = pstmt1.executeQuery();
+		
 		if(rs.next()) {
 			m = new Member();
 			
@@ -156,6 +115,13 @@ public class MemberLoginDao {
 			m.setM_addr(rs.getString("m_addr"));
 			m.setM_phone1(rs.getString("m_phone"));
 			m.setM_date(rs.getString("m_date"));
+		}else if(rs1.next()) {
+			m = new Member();
+			
+			m.setM_id(rs1.getString("a_id"));
+			m.setM_pw(rs1.getString("a_pw"));
+			m.setM_name(rs1.getString("a_name"));
+			m.setM_level(rs1.getString("a_level"));
 		}
 		return m;
 	}
