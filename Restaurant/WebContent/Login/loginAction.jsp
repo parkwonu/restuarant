@@ -42,7 +42,6 @@
 			</script>
 		<%	
 			}
-			//response.sendRedirect(request.getContextPath()+"/index.jsp");
 		%>
 	</body>
 </html>

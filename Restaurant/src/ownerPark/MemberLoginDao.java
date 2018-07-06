@@ -54,6 +54,9 @@ public class MemberLoginDao {
 			System.out.println("02아이디 불일치");
 			i = "02아이디불일치";
 		}
+		pstmt.close();
+		conn.close();
+		rs.close();
 		return i;
 	}
 	//로그인 세션 메서드
@@ -85,6 +88,9 @@ public class MemberLoginDao {
 			m.setM_name(rs1.getString("a_name"));
 			m.setM_level(rs1.getString("a_level"));
 		}
+		pstmt.close();
+		conn.close();
+		rs.close();
 		return m;
 	}
 	
@@ -123,6 +129,9 @@ public class MemberLoginDao {
 			m.setM_name(rs1.getString("a_name"));
 			m.setM_level(rs1.getString("a_level"));
 		}
+		pstmt.close();
+		conn.close();
+		rs.close();
 		return m;
 	}
 }	
